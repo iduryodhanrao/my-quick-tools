@@ -31,4 +31,7 @@ streamlit run src/main_streamlit.py
 ```
 
 ## UI image
-![alt text](image.png) ![alt text](image-1.png)
+### Stock
+![alt text](stockUI.png) 
+### News 
+![alt text](newsUI.png)
