@@ -9,7 +9,7 @@ def get_stock_data(ticker="AAPL,MSFT,^SPX"):
     querystring = {"ticker":ticker}
 
     headers = {
-        "x-rapidapi-key": "05bde85a8cmshf04501812793833p1aa983jsnede7b07be1d1",
+        "x-rapidapi-key": st.secrets["rapidapi_key"],
         "x-rapidapi-host": "yahoo-finance15.p.rapidapi.com"
     }
 
