@@ -1,2 +1,4 @@
 venv
 .streamlit
+.cpython-*
+__pycache__
