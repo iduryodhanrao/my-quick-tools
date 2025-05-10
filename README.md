@@ -31,5 +31,4 @@ streamlit run src/main_streamlit.py
 ```
 
 ## UI image
-![alt text](image.png)
-![alt text](image-1.png)
+![alt text](image.png) ![alt text](image-1.png)
