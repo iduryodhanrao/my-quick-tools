@@ -10,7 +10,7 @@ def get_news(country_code):
     querystring = {"limit":"500","country":country_code,"lang":"en"}
 
     headers = {
-        "x-rapidapi-key": "05bde85a8cmshf04501812793833p1aa983jsnede7b07be1d1",
+        "x-rapidapi-key": st.secrets["rapidapi_key"],
         "x-rapidapi-host": "real-time-news-data.p.rapidapi.com"
     }
 
