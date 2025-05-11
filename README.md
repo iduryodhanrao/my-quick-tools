@@ -2,7 +2,7 @@
 
 A **Streamlit-powered web application** that fetches 
     **real-time stock market data** from Yahoo Finance, displaying **stock prices, and market insights** in a structured format.
-    **real-time NEWS** from Real-time-news-data, displaying **news by country** in a structured format.
+    **real-time NEWS** from Real-time-news-data, displaying **news by country** in a structured format. 
 
 ## ✨ Features
 - **News update with 24 hour cache** for selected tickers
@@ -29,7 +29,6 @@ pip install -r requirements.txt
 ```bash
 streamlit run src/main_streamlit.py
 ```
-
 ## UI image
 ### Stock
 ![alt text](stockUI.png) 
