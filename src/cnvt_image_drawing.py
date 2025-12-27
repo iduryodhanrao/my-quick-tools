@@ -1,4 +1,10 @@
-import cv2
+try:
+    import cv2
+except Exception as e:
+    raise ImportError(
+        "OpenCV (cv2) is required. On servers without GUI install 'opencv-python-headless' or add 'opencv-python' locally. "
+        f"Original error: {e}"
+    )
 import numpy as np
 import io
 from typing import Optional
