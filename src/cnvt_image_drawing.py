@@ -43,9 +43,9 @@ def convert_image_bytes(
         blur_ksize += 1
 
     # Apply Gaussian blur first, then bilateral filter to preserve edges while reducing noise
-    blurred = cv2.GaussianBlur(gray, (blur_ksize, blur_ksize), 0)
+    #blurred = cv2.GaussianBlur(gray, (blur_ksize, blur_ksize), 0)
     # Use provided sigma_color and sigma_space for bilateral filtering
-    filtered = cv2.bilateralFilter(blurred, d=blur_ksize, sigmaColor=sigma_color, sigmaSpace=sigma_space)
+    filtered = cv2.bilateralFilter(gray, d=blur_ksize, sigmaColor=sigma_color, sigmaSpace=sigma_space)
 
     # Use adaptive thresholding for better edge separation
     adaptive_thresh = cv2.adaptiveThreshold(
