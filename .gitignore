@@ -2,3 +2,4 @@ venv
 .streamlit
 .cpython-*
 __pycache__
+output/*

@@ -2,6 +2,8 @@ import streamlit as st
 #from weather import get_weather
 from stocks import get_stock_data
 from news import get_news
+from cnvt_image_drawing import convert_image_bytes
+import io
 
 country_codes = {
     "IN": "India",
@@ -77,7 +79,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 # Create multiple tabs
-tab1, tab2, tab3 = st.tabs(["📰 News", "🌦️ Weather", "📈 Stock Market"])
+tab1, tab2, tab3, tab4 = st.tabs(["📰 News", "🌦️ Weather", "📈 Stock Market", "🖼️ Image Convert"])
 
 # News Tab
 with tab1:
@@ -134,5 +136,49 @@ with tab3:
             st.write(f"<small>**Today's Low:** ${stock['regularMarketDayLow']}</small>", unsafe_allow_html=True)
             st.write(f"<small>**52-Week Range:** {stock['fiftyTwoWeekRange']}</small>", unsafe_allow_html=True)
             st.write("---")
+
+# Image Convert Tab
+with tab4:
+    st.header("Image Convert — Outline / Sketch")
+    st.write("Upload an image and convert it to a clean outline sketch.")
+
+    # Controls for conversion
+    st.sidebar.markdown("### Image convert settings")
+    blur_ksize = st.sidebar.slider("Blur kernel (bilateral d)", min_value=1, max_value=31, value=9, step=2)
+    sigma_color = st.sidebar.slider("Sigma Color (bilateral)", min_value=1, max_value=200, value=75, step=1)
+    sigma_space = st.sidebar.slider("Sigma Space (bilateral)", min_value=1, max_value=200, value=75, step=1)
+    min_area = st.sidebar.slider("Min contour area to keep", min_value=1, max_value=5000, value=100, step=1)
+
+    uploaded_file = st.file_uploader("Choose an image", type=["png", "jpg", "jpeg", "bmp", "tiff"])
+    if uploaded_file is not None:
+        # Read uploaded file bytes
+        input_bytes = uploaded_file.read()
+
+        # Display original image
+        st.subheader("Original Image")
+        st.image(input_bytes, caption=uploaded_file.name)
+
+        # Convert image with selected parameters
+        try:
+            output_png = convert_image_bytes(
+                input_bytes,
+                blur_ksize=blur_ksize,
+                sigma_color=sigma_color,
+                sigma_space=sigma_space,
+                min_area=min_area,
+            )
+        except Exception as e:
+            st.error(f"Image conversion failed: {e}")
+        else:
+            st.subheader("Converted Outline")
+            st.image(output_png, caption="Outline", use_column_width=True)
+
+            # Provide download button
+            st.download_button(
+                label="Download outline PNG",
+                data=output_png,
+                file_name=f"{uploaded_file.name.rsplit('.',1)[0]}_outline.png",
+                mime="image/png",
+            )
 
     
