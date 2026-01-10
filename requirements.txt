@@ -4,5 +4,4 @@ opencv-python-headless
 yfinance
 ta
 plotly
-time
 pytz
