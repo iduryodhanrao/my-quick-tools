@@ -112,10 +112,9 @@ if page == "📰 News":
 elif page == "🌍 World Time":
     st.header("🌍 World Wall Clock — Live Time Across Countries")
     
-    # Auto-refresh every second
-    
-    #time.sleep(5)
-    #st.rerun()
+    # Refresh button to update time
+    if st.button("🔄 Refresh", key="refresh_time"):
+        st.rerun()
     
     # Countries & Timezones
     countries = [
