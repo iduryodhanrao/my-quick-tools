@@ -1,10 +1,9 @@
 import streamlit as st
-#from weather import get_weather
 from stocks import get_stock_data
 from news import get_news
 from cnvt_image_drawing import convert_image_bytes
 from screener import StockScreener
-import io
+from worldtime import CountryTime
 from datetime import datetime, timedelta
 
 country_codes = {
@@ -87,7 +86,7 @@ import pandas as pd
 st.sidebar.title("📌 Navigation")
 page = st.sidebar.radio(
     "Select a page:",
-    ["📰 News", "🌦️ Weather", "📈 Stock Market", "🖼️ Image Convert", "📊 Stock Screener"],
+    ["📰 News", "🌍 World Time", "📈 Stock Market", "🖼️ Image Convert", "📊 Stock Screener"],
     label_visibility="collapsed",
     key="page_navigation"
 )
@@ -109,11 +108,49 @@ if page == "📰 News":
         st.write(f"[Read More]({article['link']})")
         st.write("---")
 
-# WEATHER PAGE
-elif page == "🌦️ Weather":
-    st.header("Current Weather Report")
-    #weather_data = get_weather()
-    #st.write(weather_data)  # Customize based on response structure
+# WORLD TIME PAGE
+elif page == "🌍 World Time":
+    st.header("🌍 World Wall Clock — Live Time Across Countries")
+    
+    # Auto-refresh every second
+    
+    #time.sleep(5)
+    #st.rerun()
+    
+    # Countries & Timezones
+    countries = [
+        CountryTime("United States (New York)", "America/New_York"),
+        CountryTime("United States (Chicago)", "America/Chicago"),
+        CountryTime("United States (Denver)", "America/Denver"),
+        CountryTime("United States (Los Angeles)", "America/Los_Angeles"),
+        CountryTime("India", "Asia/Kolkata"),
+        CountryTime("United Kingdom", "Europe/London"),
+        CountryTime("Japan", "Asia/Tokyo"),
+        CountryTime("Australia (Sydney)", "Australia/Sydney"),
+        CountryTime("UAE (Dubai)", "Asia/Dubai"),
+        CountryTime("Singapore", "Asia/Singapore"),
+        CountryTime("China (Beijing)", "Asia/Shanghai"),
+        CountryTime("Russia (Moscow)", "Europe/Moscow"),
+    ]
+    
+    # Wall-Clock Grid Display (4 columns)
+    cols = st.columns(4)
+    
+    for idx, c in enumerate(countries):
+        with cols[idx % 4]:
+            st.markdown(f"### {c.country_name}")
+            st.markdown(
+                f"""
+                <div style="font-size:48px; font-weight:bold; margin-top:-10px;">
+                    {c.get_current_time()}
+                </div>
+                <div style="font-size:18px; color:gray;">
+                    {c.get_current_date()}
+                </div>
+                <hr>
+                """,
+                unsafe_allow_html=True
+            )
 
 # STOCKS PAGE
 elif page == "📈 Stock Market":
