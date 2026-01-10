@@ -1,3 +1,6 @@
 streamlit
 numpy
 opencv-python-headless
+yfinance
+ta
+plotly
