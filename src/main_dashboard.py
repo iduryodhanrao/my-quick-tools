@@ -113,6 +113,7 @@ elif page == "🌍 World Time":
     st.header("🌍 World Wall Clock — Live Time Across Countries")
     
     # Refresh button to update time
+    
     if st.button("🔄 Refresh", key="refresh_time"):
         st.rerun()
     
@@ -231,7 +232,7 @@ elif page == "📊 Stock Screener":
     st.sidebar.markdown("### Stock Screener Settings")
     tickers_input = st.sidebar.text_input(
         "Tickers (comma-separated)",
-        value="AAPL, MSFT, TSLA, AMZN",
+        value="AAPL, MSFT, TSLA, AMZN, NVDA, GOOG, META, PLTR, WMT, AMD",
         key="screener_tickers"
     )
     
